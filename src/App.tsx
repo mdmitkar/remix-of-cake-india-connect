@@ -7,7 +7,7 @@ import Index from "./pages/Index";
 import StudentCourses from "./pages/StudentCourses";
 import NotFound from "./pages/NotFound";
 import useScrollToHash from "./hooks/useScrollToHash";
-
+  
 const ScrollHandler = () => {
   useScrollToHash();
   return null;

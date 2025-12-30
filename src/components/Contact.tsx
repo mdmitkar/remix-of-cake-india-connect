@@ -71,7 +71,7 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email",
-      details: ["fahmeeda.cakes@gmail.com", "For bulk orders"],
+      details: ["popinzbakers@gmail.com", "For bulk orders"],
     },
     {
       icon: Clock,
