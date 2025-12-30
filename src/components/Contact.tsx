@@ -12,13 +12,47 @@ const Contact = () => {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Order Request Submitted!",
-      description: "Popinz team will get back to you within 24 hours.",
-    });
-    setFormData({ name: "", email: "", phone: "", cakeType: "", message: "" });
+    setIsSubmitting(true);
+
+    const googleFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSecLjqYT9DUbP1xY7Qv0qbRJ5IpZBXCN1il7C7mDjtETnfpGg/formResponse";
+
+    // Using URLSearchParams is often more reliable for Google Forms
+    const params = new URLSearchParams();
+    params.append("entry.1979511030", formData.name);
+    params.append("entry.701280309", formData.phone);
+    params.append("entry.1073043973", formData.email);
+    params.append("entry.329760994", formData.cakeType);
+    params.append("entry.2124088791", formData.message);
+
+    try {
+      await fetch(googleFormUrl, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: params.toString(),
+      });
+
+      toast({
+        title: "Order Request Submitted!",
+        description: "Popinz team will get back to you within 24 hours.",
+      });
+      setFormData({ name: "", email: "", phone: "", cakeType: "", message: "" });
+    } catch (error) {
+      console.error("Form error:", error);
+      toast({
+        title: "Submission Error",
+        description: "Please try contacting us via WhatsApp directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
@@ -68,7 +102,7 @@ const Contact = () => {
             <h3 className="text-2xl font-display font-bold text-foreground mb-6">
               Cake Order Enquiry
             </h3>
-            
+
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
@@ -122,13 +156,13 @@ const Contact = () => {
                   className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-rose/50 focus:border-rose transition-all"
                 >
                   <option value="">Select cake type</option>
-                  <option value="birthday">Birthday Cake</option>
-                  <option value="wedding">Wedding Cake</option>
-                  <option value="anniversary">Anniversary Cake</option>
-                  <option value="photo">Photo Cake</option>
-                  <option value="theme">Theme Cake</option>
-                  <option value="cupcakes">Cupcakes / Cake Pops</option>
-                  <option value="other">Other</option>
+                  <option value="Birthday Cake">Birthday Cake</option>
+                  <option value="Wedding Cake">Wedding Cake</option>
+                  <option value="Anniversary Cake">Anniversary Cake</option>
+                  <option value="Photo Cake">Photo Cake</option>
+                  <option value="Theme Cake">Theme Cake</option>
+                  <option value="Cupcakes / Cake Pops">Cupcakes / Cake Pops</option>
+                  <option value="Other">Other</option>
                 </select>
               </div>
 
@@ -145,9 +179,15 @@ const Contact = () => {
                 />
               </div>
 
-              <Button variant="hero" size="lg" className="w-full">
-                <Send className="w-4 h-4 mr-2" />
-                Send Order Request
+              <Button variant="hero" size="lg" className="w-full" disabled={isSubmitting}>
+                {isSubmitting ? (
+                  "Sending..."
+                ) : (
+                  <>
+                    <Send className="w-4 h-4 mr-2" />
+                    Send Order Request
+                  </>
+                )}
               </Button>
             </form>
           </div>
@@ -190,9 +230,9 @@ const Contact = () => {
                 className="bg-primary-foreground/10 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground hover:text-rose"
                 asChild
               >
-              <a href="https://wa.me/919373284417?text=Hi%2C%20I%20want%20to%20order%20a%20cake" target="_blank" rel="noopener noreferrer">
-                Chat on WhatsApp
-              </a>
+                <a href="https://wa.me/919373284417?text=Hi%2C%20I%20want%20to%20order%20a%20cake" target="_blank" rel="noopener noreferrer">
+                  Chat on WhatsApp
+                </a>
               </Button>
             </div>
 
