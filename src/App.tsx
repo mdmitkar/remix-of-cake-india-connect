@@ -6,6 +6,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import StudentCourses from "./pages/StudentCourses";
 import NotFound from "./pages/NotFound";
+import useScrollToHash from "./hooks/useScrollToHash";
+
+const ScrollHandler = () => {
+  useScrollToHash();
+  return null;
+};
 
 const queryClient = new QueryClient();
 
@@ -15,6 +21,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollHandler />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/student-courses" element={<StudentCourses />} />
