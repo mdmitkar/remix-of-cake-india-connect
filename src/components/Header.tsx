@@ -20,7 +20,7 @@ const Header = () => {
     { name: "Our Cakes", href: "/#cakes" },
     { name: "About", href: "/#about" },
     { name: "Courses", href: "/#courses" },
-    { name: "Student Courses", href: "/student-courses" },
+    { name: "Institution Tie-ups", href: "/student-courses" },
     { name: "Contact", href: "/#contact" },
   ];
 
