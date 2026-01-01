@@ -1,10 +1,10 @@
-import { 
-  GraduationCap, 
-  Clock, 
-  BookOpen, 
-  Award, 
-  Users, 
-  Lightbulb, 
+import {
+  GraduationCap,
+  Clock,
+  BookOpen,
+  Award,
+  Users,
+  Lightbulb,
   ChefHat,
   Building2,
   Target,
@@ -23,6 +23,8 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import { SEO } from "@/components/SEO";
+
 
 const StudentCourses = () => {
   const courseModules = [
@@ -134,8 +136,30 @@ const StudentCourses = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Student Baking Courses | Popinz Cake Bakers & Academy"
+        description="Join our specialized baking courses for school and college students. Learn cake making, decoration, and entrepreneurship skills. Certified courses available."
+        keywords="student baking classes, baking course for beginners, cake making workshop, vocational courses for students, baking classes wardha"
+        image="https://popinzbakingacademy.com/student-courses-thumb.jpg"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "Course",
+          "name": "Student Baking & Cake Artistry Course",
+          "description": "A comprehensive baking course designed for students to learn the art of cake making and decoration.",
+          "provider": {
+            "@type": "Organization",
+            "name": "Popinz Cake Bakers & Academy",
+            "sameAs": "https://popinzbakingacademy.com"
+          },
+          "hasCourseInstance": {
+            "@type": "CourseInstance",
+            "courseMode": "In-person",
+            "courseWorkload": "P2W"
+          }
+        }}
+      />
       <Header />
-      
+
       {/* Hero Section */}
       <section className="pt-28 pb-16 bg-gradient-hero">
         <div className="container mx-auto px-4 text-center">
@@ -176,7 +200,7 @@ const StudentCourses = () => {
               Watch how students learn and create amazing cakes in our hands-on baking sessions
             </p>
           </div>
-          
+
           {/* Main Featured Video */}
           <div className="max-w-5xl mx-auto mb-12">
             <div className="relative rounded-2xl overflow-hidden shadow-hover bg-foreground/5">
@@ -274,22 +298,19 @@ const StudentCourses = () => {
           </div>
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {durationOptions.map((option, index) => (
-              <div 
-                key={index} 
-                className={`bg-card p-8 rounded-2xl shadow-card text-center hover:shadow-hover transition-all hover:-translate-y-2 border-2 ${
-                  option.color === "mango" ? "border-mango" : 
-                  option.color === "orange" ? "border-orange" : "border-rose"
-                }`}
+              <div
+                key={index}
+                className={`bg-card p-8 rounded-2xl shadow-card text-center hover:shadow-hover transition-all hover:-translate-y-2 border-2 ${option.color === "mango" ? "border-mango" :
+                    option.color === "orange" ? "border-orange" : "border-rose"
+                  }`}
               >
-                <Clock className={`w-12 h-12 mx-auto mb-4 ${
-                  option.color === "mango" ? "text-mango" : 
-                  option.color === "orange" ? "text-orange" : "text-rose"
-                }`} />
+                <Clock className={`w-12 h-12 mx-auto mb-4 ${option.color === "mango" ? "text-mango" :
+                    option.color === "orange" ? "text-orange" : "text-rose"
+                  }`} />
                 <h3 className="text-xl font-display font-bold text-foreground mb-2">{option.name}</h3>
-                <p className={`text-2xl font-bold ${
-                  option.color === "mango" ? "text-mango" : 
-                  option.color === "orange" ? "text-orange" : "text-rose"
-                }`}>{option.duration}</p>
+                <p className={`text-2xl font-bold ${option.color === "mango" ? "text-mango" :
+                    option.color === "orange" ? "text-orange" : "text-rose"
+                  }`}>{option.duration}</p>
               </div>
             ))}
           </div>
@@ -306,8 +327,8 @@ const StudentCourses = () => {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {courseModules.map((module, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className="bg-card p-6 rounded-2xl shadow-card hover:shadow-hover transition-shadow border border-border"
               >
                 <div className="flex items-center gap-3 mb-4">
